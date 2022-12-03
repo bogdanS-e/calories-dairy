@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useContext } from "../context/globalContext";
 
 const StartPage = ({ navigation }) => {
   const { checkUser } = useContext();
-  const navigate = useNavigate();
 
   useEffect(() => {
     checkUser(navigation);
@@ -26,18 +25,16 @@ const StartPage = ({ navigation }) => {
         </div>
         <Image src="/assets/avocado.png" />
         <div>
-          <Button
-            key='a'
-            onClick={() => navigate("sign-in")}
-          >
-            <TextButton>Get In</TextButton>
-          </Button>
-          <ButtonNew
-            key='b'
-            onClick={() => navigate("sign-up")}
-          >
-            <TextButton>Create an Account</TextButton>
-          </ButtonNew>
+          <Link to='/sign-in'>
+            <Button>
+              <TextButton>Get In</TextButton>
+            </Button>
+          </Link>
+          <Link to='/sign-up'>
+            <ButtonNew>
+              <TextButton>Create an Account</TextButton>
+            </ButtonNew>
+          </Link>
         </div>
       </Gradient>
     </Container>
@@ -88,10 +85,9 @@ const Gradient = styled.div`
 
 const TextButton = styled.div`
   font-size: 16px;
-  line-height: 21;
   font-weight: bold;
-  letter-spacing: 0.25;
   color: #3A4320;
+  text-decoration: none;
 `;
 
 const Button = styled.div`

@@ -9,6 +9,7 @@ import StartPage from "./components/startPage";
 import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
 import PostRegistration from "./components/PostRegistration";
+import Statistic from "./components/Statistic";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <GlobalContextProvider>
       <Page>
-        <ToastContainer  />
+        <ToastContainer />
 
         <Content>
           <Routes>
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/post-registration" element={<PostRegistration />} />
+            <Route path="statistic" element={<Statistic />} />
           </Routes>
         </Content>
         <Overlay />
