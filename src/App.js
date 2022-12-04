@@ -10,6 +10,7 @@ import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
 import PostRegistration from "./components/PostRegistration";
 import Statistic from "./components/Statistic";
+import Nutrition from "./components/Nutrition";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +26,8 @@ export default function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/post-registration" element={<PostRegistration />} />
-            <Route path="statistic" element={<Statistic />} />
+            <Route path="/statistic" element={<Statistic />} />
+            <Route path="/nutrition" element={<Nutrition />} />
           </Routes>
         </Content>
         <Overlay />

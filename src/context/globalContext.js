@@ -23,7 +23,7 @@ export const GlobalContext = React.createContext({
 export const useContext = () => React.useContext(GlobalContext);
 
 export const GlobalContextProvider = ({ children }) => {
-  const baseUrl = "http://b201-92-111-145-202.ngrok.io/api";
+  const baseUrl = "https://ripe-views-turn-91-237-27-48.loca.lt/api";
 
   const [user, setUser] = useState({
     name: "",
