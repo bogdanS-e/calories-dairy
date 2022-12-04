@@ -25,7 +25,9 @@ const NewSignUp = () => {
           const resp = await fetch(`${baseUrl}/register/`, {
             method: 'post',
             headers: {
-              "content-type": "application/json",
+              "Content-Type": "application/json",
+              "Accept": "*/*",
+
             },
             body: JSON.stringify({
               username: login,

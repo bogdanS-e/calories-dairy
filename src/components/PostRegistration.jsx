@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 import styled, { css } from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 //import { Picker } from "@react-native-picker/picker";
 
@@ -17,8 +18,9 @@ const radioProps = [
   { label: "female", value: "female" },
 ];
 
-const PostRegistration = ({ navigation }) => {
+const PostRegistration = () => {
   const { setUser, baseUrl, checkUser } = useContext();
+  const navigate = useNavigate();
 
   const step1 = useRef(null);
   const step2 = useRef(null);
@@ -58,6 +60,7 @@ const PostRegistration = ({ navigation }) => {
         method: "post",
         headers: {
           "content-type": "application/json",
+          "Accept": "*/*",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -73,6 +76,7 @@ const PostRegistration = ({ navigation }) => {
         method: "get",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Accept": "*/*",
         },
       });
 
@@ -99,7 +103,7 @@ const PostRegistration = ({ navigation }) => {
           eatingCategory: eatingCategoryJson.results,
         });
 
-        navigation.navigate("nutrition", { page: "nutrition" });
+        navigate("nutrition", { page: "nutrition" });
       }
     } catch (error) {
       console.log(error);
@@ -151,6 +155,7 @@ const PostRegistration = ({ navigation }) => {
         method: "get",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Accept": "*/*",
         },
       });
 
@@ -161,7 +166,7 @@ const PostRegistration = ({ navigation }) => {
       setActivityList(json.results);
       setActivity(json.results[0].id);
     } catch (error) {
-      checkUser(navigation);
+      checkUser(navigate);
     }
   };
 

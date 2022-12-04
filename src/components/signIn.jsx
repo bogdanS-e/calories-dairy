@@ -22,6 +22,7 @@ const NewSignIn = () => {
         method: "post",
         headers: {
           "content-type": "application/json",
+          "Accept": "*/*",
         },
         body: JSON.stringify({
           username: login,

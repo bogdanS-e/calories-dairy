@@ -53,6 +53,7 @@ const Nutrition = () => {
         method: "get",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Accept": "*/*",
         },
       });
 

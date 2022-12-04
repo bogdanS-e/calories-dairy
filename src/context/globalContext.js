@@ -23,7 +23,7 @@ export const GlobalContext = React.createContext({
 export const useContext = () => React.useContext(GlobalContext);
 
 export const GlobalContextProvider = ({ children }) => {
-  const baseUrl = "https://ripe-views-turn-91-237-27-48.loca.lt/api";
+  const baseUrl = "https://true-rice-cover-91-237-27-48.loca.lt/api";
 
   const [user, setUser] = useState({
     name: "",
@@ -60,6 +60,7 @@ export const GlobalContextProvider = ({ children }) => {
           method: "get",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Accept": "*/*",
           },
         });
 
@@ -75,13 +76,14 @@ export const GlobalContextProvider = ({ children }) => {
           localStorage.setItem("access_token", access_token);
 
           if (!is_ready) {
-            return navigate("post-registration");
+            return navigate("/post-registration");
           }
 
           const getUserResp = await fetch(`${baseUrl}/profile/`, {
             method: "get",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Accept": "*/*",
             },
           });
 
@@ -95,6 +97,7 @@ export const GlobalContextProvider = ({ children }) => {
             method: "get",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Accept": "*/*",
             },
           });
 
@@ -104,6 +107,7 @@ export const GlobalContextProvider = ({ children }) => {
             method: "get",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Accept": "*/*",
             },
           });
 
@@ -125,7 +129,7 @@ export const GlobalContextProvider = ({ children }) => {
             eatingCategory: eatingCategoryJson.results,
           });
 
-          navigate("nutrition");
+          navigate("/nutrition");
         }
       }
     } catch (error) {

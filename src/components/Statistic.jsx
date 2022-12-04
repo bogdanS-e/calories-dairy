@@ -81,6 +81,7 @@ const Nutrition = ({ navigation, route }) => {
         method: "get",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Accept": "*/*",
         },
       });
 
