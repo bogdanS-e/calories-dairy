@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useContext } from "../context/globalContext";
 
-const StartPage = ({ navigation }) => {
+const StartPage = () => {
   const { checkUser } = useContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    checkUser(navigation);
+    checkUser(navigate);
   }, []);
 
   return (

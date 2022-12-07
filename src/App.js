@@ -11,6 +11,9 @@ import SignUp from "./components/signUp";
 import PostRegistration from "./components/PostRegistration";
 import Statistic from "./components/Statistic";
 import Nutrition from "./components/Nutrition";
+import Food from "./components/Food";
+import ChooseFood from "./components/ChooseFood";
+//import Hydration from "./components/Hydration";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +31,9 @@ export default function App() {
             <Route path="/post-registration" element={<PostRegistration />} />
             <Route path="/statistic" element={<Statistic />} />
             <Route path="/nutrition" element={<Nutrition />} />
+            <Route path="/food/:foodId" element={<Food />} />
+            <Route path="/food/:foodId/:categoryId" element={<ChooseFood />} />
+            {/* <Route path="/hydration" element={<Hydration />} /> */}
           </Routes>
         </Content>
         <Overlay />

@@ -27,7 +27,7 @@ const PostRegistration = () => {
 
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date(Date.now() - 390000000000));
   const [sex, setSex] = useState(radioProps[0].label);
   const [step, setStep] = useState(0);
   const [activity, setActivity] = useState();
@@ -103,7 +103,7 @@ const PostRegistration = () => {
           eatingCategory: eatingCategoryJson.results,
         });
 
-        navigate("nutrition", { page: "nutrition" });
+        navigate("/nutrition");
       }
     } catch (error) {
       console.log(error);
@@ -174,6 +174,7 @@ const PostRegistration = () => {
     getActivity();
   }, []);
 
+  console.log(activity);
   return (
     <Container>
       <Step>Step {step + 1}</Step>
@@ -264,7 +265,7 @@ const PostRegistration = () => {
       {step === 4 && (
         <div>
           <Text1>Select your activity:</Text1>
-          {/* <Picker
+          <select
             style={{
               width: 300,
               backgroundColor: "#9acf02",
@@ -272,18 +273,17 @@ const PostRegistration = () => {
               fontSize: 20,
               overflow: "hidden",
             }}
-            selectedValue={activity}
-            onValueChange={(itemValue) => setActivity(itemValue)}
           >
             {Array.isArray(activityList) &&
               activityList.map((activity) => (
-                <Picker.Item
+                <option
                   label={activity.name}
                   value={activity.id}
                   key={activity.id}
+                  onClick={() => setActivity(activity.id)}
                 />
               ))}
-          </Picker> */}
+          </select>
         </div>
       )}
       <ControllerContainer>

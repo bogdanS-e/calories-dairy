@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 //import NavBar from "./NavBar";
 
@@ -21,7 +22,9 @@ const getProgress = (width, total, taken) => {
 };
 
 const Nutrition = () => {
-  const { user, baseUrl } = useContext();
+  const { user, baseUrl, checkUser } = useContext();
+  const navigate = useNavigate();
+
   const [progressWidth, setProgressWidth] = useState({
     carbs: 0,
     cals: 0,
@@ -85,8 +88,17 @@ const Nutrition = () => {
 
   React.useEffect(() => {
     getInfo();
+    checkUser(navigate);
+    setProgressWidth((prev) => ({
+      ...prev,
+      cals: 740,
+      fats: 740,
+      carbs: 740,
+      proteins: 740,
+    }));
   }, []);
 
+  console.log(user);
   return (
     <Container>
       <div>
@@ -101,15 +113,7 @@ const Nutrition = () => {
               <Text3>Let's check your calories today!</Text3>
               <Text3>Cal left</Text3>
             </Horizontal>
-            <ProgressBar
-              onLayout={(event) => {
-                const { width } = event.nativeEvent.layout;
-                setProgressWidth((prev) => ({
-                  ...prev,
-                  cals: width,
-                }));
-              }}
-            >
+            <ProgressBar>
               <div
                 style={getProgress(
                   progressWidth.cals,
@@ -121,15 +125,7 @@ const Nutrition = () => {
             <Horizontal>
               <ParticularValues>
                 <Text3>Carbs</Text3>
-                <ProgressBarSmall
-                  onLayout={(event) => {
-                    const { width } = event.nativeEvent.layout;
-                    setProgressWidth((prev) => ({
-                      ...prev,
-                      carbs: width,
-                    }));
-                  }}
-                >
+                <ProgressBarSmall>
                   <div
                     style={getProgress(
                       progressWidth.carbs,
@@ -142,15 +138,7 @@ const Nutrition = () => {
               </ParticularValues>
               <ParticularValuesCenter>
                 <Text3>Proteins</Text3>
-                <ProgressBarSmall
-                  onLayout={(event) => {
-                    const { width } = event.nativeEvent.layout;
-                    setProgressWidth((prev) => ({
-                      ...prev,
-                      proteins: width,
-                    }));
-                  }}
-                >
+                <ProgressBarSmall>
                   <div
                     style={getProgress(
                       progressWidth.proteins,
@@ -163,15 +151,7 @@ const Nutrition = () => {
               </ParticularValuesCenter>
               <ParticularValues>
                 <Text3>Fats</Text3>
-                <ProgressBarSmall
-                  onLayout={(event) => {
-                    const { width } = event.nativeEvent.layout;
-                    setProgressWidth((prev) => ({
-                      ...prev,
-                      carbs: width,
-                    }));
-                  }}
-                >
+                <ProgressBarSmall>
                   <div
                     style={getProgress(
                       progressWidth.fats,
@@ -187,33 +167,30 @@ const Nutrition = () => {
         </MainInfo>
       </div>
       <ScrollWrapper>
-        <div>
-          {user.eatingCategory.map((el) => {
-            return (
-              <FoodBlock
-                key={el.id}
-                to='food'
-              //onPress={() => navigation.navigate("food", { page: el.id })}
-              >
-                <Gradient>
-                  <FoodIcon>
-                    <FoodIconText>+</FoodIconText>
-                  </FoodIcon>
-                  <div>
-                    <FoodBlockTitle>{el.name}</FoodBlockTitle>
-                  </div>
-                  <FoodBlockNow>
-                    <FoodBlockNowText>
-                      {taken.find((take) => take.eating_category_id === el.id)
-                        ?.food_item__calorie__sum || "0"}{" "}
-                      cal
-                    </FoodBlockNowText>
-                  </FoodBlockNow>
-                </Gradient>
-              </FoodBlock>
-            );
-          })}
-        </div>
+        {user.eatingCategory.map((el) => {
+          return (
+            <FoodBlock
+              key={el.id}
+              to={`/food/${el.id}`}
+            >
+              <Gradient>
+                <FoodIcon>
+                  <FoodIconText>+</FoodIconText>
+                </FoodIcon>
+                <div>
+                  <FoodBlockTitle>{el.name}</FoodBlockTitle>
+                </div>
+                <FoodBlockNow>
+                  <FoodBlockNowText>
+                    {taken.find((take) => take.eating_category_id === el.id)
+                      ?.food_item__calorie__sum || "0"}{" "}
+                    cal
+                  </FoodBlockNowText>
+                </FoodBlockNow>
+              </Gradient>
+            </FoodBlock>
+          );
+        })}
       </ScrollWrapper>
       {/* <NavBar navigation={navigation} route={route} /> */}
     </Container>
@@ -221,6 +198,7 @@ const Nutrition = () => {
 };
 
 const Gradient = styled.div`
+  background-image: linear-gradient(#3C9EE9, #3A63A1);
   flex-direction: row;
   padding: 15px;
   height: 80px;
@@ -236,26 +214,28 @@ const Container = styled.div`
   justify-content: space-between;
   position: relative;
   background-color: #F4F4F4;
+  flex-direction: column;
+  width: 800px;
 `;
 
 const Header = styled.div`
-  margin-top: 40px;
-  margin-left: 30px;
+  margin: 40px 30px;
   font-weight: bold;
-  font-size: 24;
+  font-size: 24px;
 `;
 
 const MainInfo = styled.div`
-  margin-top: 40px;
-  margin-left: 30px;
+margin: 40px 30px;
+
   font-weight: bold;
-  font-size: 24;
+  font-size: 24px;
+
 `;
 
 const Horizontal = styled.div`
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const ParticularValues = styled.div`
@@ -265,7 +245,6 @@ const ParticularValues = styled.div`
 
 const ParticularValuesCenter = styled.div`
   flex: 1;
-  margin: 0 10px;
 `;
 
 const ProgressBar = styled.div`
@@ -275,40 +254,49 @@ const ProgressBar = styled.div`
   margin-top: 20px;
   margin-bottom: 15px;
   position: relative;
+  width: 740px;
 `;
 
 const ProgressBarSmall = styled.div`
   background-color: #DCDFE6;
   height: 10px;
-  border-radius: 5px,
-  margin: 5px 0;
+  border-radius: 5px;
+  margin: 5px 0 10px;
+  width: 740px;
   position: relative;
 `;
 
 const ScrollWrapper = styled.div`
-  flex: 1;
   margin-top: 20px;
+  overflow-y: scroll;
+  height: 400px;
 `;
 
 const FoodBlock = styled(Link)`
   margin: 5px 30px;
+  display: block;
 `;
 
 const Text1 = styled.div`
   font-weight: bold;
   color: #3B3B3B;
   font-size: 20px;
+  text-align:center;
 `;
 
 const Text2 = styled.div`
   color: #3B3B3B;
   font-size: 12px;
+  text-align:center;
+
   font-weight: bold;
 `;
 
 const Text3 = styled.div`
   color: #BCBCBC;
   font-size: 12px;
+  text-align:center;
+
 `;
 
 const FoodIcon = styled.div`

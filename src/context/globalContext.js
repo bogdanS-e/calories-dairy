@@ -23,7 +23,7 @@ export const GlobalContext = React.createContext({
 export const useContext = () => React.useContext(GlobalContext);
 
 export const GlobalContextProvider = ({ children }) => {
-  const baseUrl = "https://true-rice-cover-91-237-27-48.loca.lt/api";
+  const baseUrl = "https://tasty-ducks-decide-92-111-145-202.loca.lt/api";
 
   const [user, setUser] = useState({
     name: "",
@@ -54,6 +54,8 @@ export const GlobalContextProvider = ({ children }) => {
   const checkUser = async (navigate) => {
     const token = localStorage.getItem("access_token");
 
+    console.log('here');
+    console.log(token);
     try {
       if (token) {
         const resp = await fetch(`${baseUrl}/user-info/`, {
@@ -129,6 +131,7 @@ export const GlobalContextProvider = ({ children }) => {
             eatingCategory: eatingCategoryJson.results,
           });
 
+          console.log('nutrition _+________');
           navigate("/nutrition");
         }
       }
