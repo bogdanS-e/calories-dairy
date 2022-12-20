@@ -32,8 +32,6 @@ const NewSignIn = () => {
 
       const json = await resp.json();
 
-      console.log(resp.status);
-      console.log(json);
       if (resp.status !== 201 && resp.status !== 200) {
         return toast.warn(json.detail, {
           position: toast.POSITION.BOTTOM_CENTER
