@@ -150,7 +150,7 @@ const Container = styled.div`
 
 const DrinkingBlock = styled.div`
   margin: 0 40px;
-  height: 50px;
+  height: 120px;
 `
 
 const DrinkedBlockVolume = styled.div`

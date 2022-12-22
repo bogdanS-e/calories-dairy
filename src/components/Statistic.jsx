@@ -130,16 +130,17 @@ const Nutrition = ({ navigation, route }) => {
     datasets: [
       {
         data: water.map((el) => el.water),
-        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        label: 'Water',
+        borderColor: `#000ac9`, // optional
+        backgroundColor: '#626afc',
       },
       {
         data: food.map((el) => el.cals),
-        color: (opacity = 1) => `rgba(0, 255, 0, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        borderColor: '#43c900', // optional
+        label: 'Calories',
+        backgroundColor: '#91f75e',
       },
     ],
-    legend: ['Water', 'Calories'], // optional
   }
 
   const dataFood = {
@@ -147,18 +148,21 @@ const Nutrition = ({ navigation, route }) => {
     datasets: [
       {
         data: food.map((el) => el.proteins),
-        color: (opacity = 1) => `rgba(100, 100, 255, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        label: 'Proteins',
+        borderColor: '#6464ff', // optional
+        backgroundColor: '#aeaefc',
       },
       {
         data: food.map((el) => el.carbs),
-        color: (opacity = 1) => `rgba(100, 255, 100, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        label: 'Carbohydrates',
+        borderColor: '#64ff64', // optional
+        backgroundColor: '#a5faa5',
       },
       {
         data: food.map((el) => el.fats),
-        color: (opacity = 1) => `rgba(255, 100, 100, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        label: 'Fats',
+        borderColor: '#ff6464', // optional
+        backgroundColor: '#ffa1a1',
       },
     ],
     legend: ['Proteins', 'Carbohydrates', 'Fats'], // optional
