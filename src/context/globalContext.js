@@ -23,7 +23,7 @@ export const GlobalContext = React.createContext({
 export const useContext = () => React.useContext(GlobalContext);
 
 export const GlobalContextProvider = ({ children }) => {
-  const baseUrl = "https://tasty-ducks-decide-92-111-145-202.loca.lt/api";
+  const baseUrl = "https://ten-drinks-run-91-237-27-112.loca.lt/api";
 
   const [user, setUser] = useState({
     name: "",
